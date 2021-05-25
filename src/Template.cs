@@ -10,28 +10,28 @@ namespace SeleniumTestReportsTemplate
 	public class Template
 	{
 		public IWebDriver driver;
-		public static ExtentReports extent;
+		static ExtentReports Extent;
 
 		[SetUp]
 		public void Initialize()
 		{
-			// Prerequisite: Follow the installation guide of Selenium by 
+			// Prerequisite: Follow the installation guide of Selenium by clicking here: https://www.selenium.dev/documentation/en/selenium_installation/
 			driver = new ChromeDriver("C:\\WebDriver\\bin");
 		}
 
 		[OneTimeSetUp]
 		public void ExtentStart()
 		{
-			extent = new ExtentReports();
+			Extent = new ExtentReports();
 			var featureName = "Feature you want to test";
 			var htmlreporter = new ExtentHtmlReporter(@$"C:\ReportResults\{featureName}\index.html");
-			extent.AttachReporter(htmlreporter);
+			Extent.AttachReporter(htmlreporter);
 		}
 
 		[Test]
 		public void Test()
 		{
-			var test = extent.CreateTest("Enter test name")
+			var test = Extent.CreateTest("Enter test name")
 				.Info("Test initialized");
 
 			try
@@ -66,7 +66,7 @@ namespace SeleniumTestReportsTemplate
 		[OneTimeTearDown]
 		public void ExtentClose()
 		{
-			extent.Flush();
+			Extent.Flush();
 		}
 	}
 }
